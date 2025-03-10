@@ -1,0 +1,49 @@
+{
+  "name": "@mistweaverco/cli-html",
+  "version": "0.1.0",
+  "description": "Convert HTML to CLI output with TypeScript support",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint . --ext .ts",
+    "prepare": "npm run build"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=9.0.0"
+  },
+  "author": "Marco Kellershoff <marco@kellershoff.net>",
+  "license": "MIT",
+  "keywords": [
+    "html",
+    "render",
+    "terminal",
+    "cli",
+    "html-to-cli",
+    "html-to-terminal"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mistweaverco/cli-html-node.git"
+  },
+  "homepage": "https://github.com/mistweaverco/cli-html-node",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "20.11.24",
+    "@types/parse5": "7.0.0",
+    "@types/wrap-ansi": "8.0.1",
+    "@typescript-eslint/eslint-plugin": "7.1.0",
+    "@typescript-eslint/parser": "7.1.0",
+    "chalk": "4.1.0",
+    "chalk-string": "3.0.0",
+    "eslint": "8.57.0",
+    "parse5": "7.1.2",
+    "typescript": "5.3.3",
+    "wrap-ansi": "8.1.0"
+  }
+}
