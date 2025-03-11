@@ -1,9 +1,9 @@
-import { TagMap } from '../types';
-import { blockTag } from './tag-helpers/block-tag';
-import { textNode } from './tag-helpers/text-node';
-import { a } from './tags/a';
-import { abbr, acronym, dfn } from './tags/abbr';
-import { address } from './tags/address';
+import { TagMap } from "../types";
+import { blockTag } from "./tag-helpers/block-tag";
+import { textNode } from "./tag-helpers/text-node";
+import { a } from "./tags/a";
+import { abbr, acronym, dfn } from "./tags/abbr";
+import { address } from "./tags/address";
 import {
   article,
   aside,
@@ -21,26 +21,24 @@ import {
   p,
   picture,
   section,
-} from './tags/base-tags';
-import { blockquote } from './tags/blockquote';
-import { br } from './tags/br';
-import { center } from './tags/center';
-import { code, pre } from './tags/code';
-import { dd, dl, dt } from './tags/definitions';
-import { details } from './tags/details';
-import { body, html } from './tags/document';
-import { fieldset } from './tags/fieldset';
-import { figure } from './tags/figure';
-import {
-  h1, h2, h3, h4, h5, h6,
-} from './tags/headers';
-import { hr } from './tags/hr';
-import { img } from './tags/img';
-import { button, input, output } from './tags/inputs';
-import { li, ol, ul } from './tags/list';
-import { progress } from './tags/progress';
-import { span } from './tags/span';
-import { caption, table, td, th } from './tags/table';
+} from "./tags/base-tags";
+import { blockquote } from "./tags/blockquote";
+import { br } from "./tags/br";
+import { center } from "./tags/center";
+import { code, pre } from "./tags/code";
+import { dd, dl, dt } from "./tags/definitions";
+import { details } from "./tags/details";
+import { body, html } from "./tags/document";
+import { fieldset } from "./tags/fieldset";
+import { figure } from "./tags/figure";
+import { h1, h2, h3, h4, h5, h6 } from "./tags/headers";
+import { hr } from "./tags/hr";
+import { img } from "./tags/img";
+import { button, input, output } from "./tags/inputs";
+import { li, ol, ul } from "./tags/list";
+import { progress } from "./tags/progress";
+import { span } from "./tags/span";
+import { caption, table, td, th } from "./tags/table";
 import {
   b,
   big,
@@ -70,7 +68,7 @@ import {
   underline,
   variableTag,
   wbr,
-} from './tags/text-styles';
+} from "./tags/text-styles";
 import {
   applet,
   area,
@@ -96,13 +94,13 @@ import {
   template,
   track,
   video,
-} from './tags/void';
+} from "./tags/void";
 
 const __text = textNode;
 
 const tags: TagMap = {
-  '#text': __text,
-  '#document': blockTag,
+  "#text": __text,
+  "#document": blockTag,
   a,
   abbr,
   acronym,
@@ -212,4 +210,4 @@ const tags: TagMap = {
   dialog,
 };
 
-export default tags; 
+export default tags;

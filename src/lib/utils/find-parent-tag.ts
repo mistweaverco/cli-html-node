@@ -1,6 +1,9 @@
-import { HTMLNode } from '../../types';
+import { HTMLNode } from "../../types";
 
-export const findParentTag = (node: HTMLNode, tagName: string): HTMLNode | null => {
+export const findParentTag = (
+  node: HTMLNode,
+  tagName: string,
+): HTMLNode | null => {
   if (!node) {
     return null;
   }
@@ -14,4 +17,4 @@ export const findParentTag = (node: HTMLNode, tagName: string): HTMLNode | null 
   }
 
   return findParentTag(node.parentNode, tagName);
-}; 
+};

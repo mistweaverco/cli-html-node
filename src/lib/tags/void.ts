@@ -1,8 +1,10 @@
-import { HTMLNode, GlobalConfig, RenderResult } from '../../types';
+import { HTMLNode, GlobalConfig, RenderResult } from "../../types";
 
-const createVoidTag = () => (_node: HTMLNode, _config: GlobalConfig): RenderResult => ({
-  value: '',
-});
+const createVoidTag =
+  () =>
+  (_node: HTMLNode, _config: GlobalConfig): RenderResult => ({
+    value: "",
+  });
 
 // Export void elements
 export const area = createVoidTag();
@@ -36,4 +38,4 @@ export const optgroup = createVoidTag();
 // Media elements that might need special handling in the future
 export const audio = createVoidTag();
 export const video = createVoidTag();
-export const applet = createVoidTag(); 
+export const applet = createVoidTag();

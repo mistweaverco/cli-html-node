@@ -41,4 +41,4 @@ export interface TagRenderer {
 
 export interface TagMap {
   [key: string]: TagRenderer;
-} 
+}

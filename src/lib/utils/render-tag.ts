@@ -1,10 +1,10 @@
-import { HTMLNode, GlobalConfig, RenderResult, TagRenderer } from '../../types';
-import tags from '../tags';
+import { HTMLNode, GlobalConfig, RenderResult, TagRenderer } from "../../types";
+import tags from "../tags";
 
 export const renderTag = (
-  node: HTMLNode, 
-  config: GlobalConfig, 
-  fallbackRenderer?: TagRenderer
+  node: HTMLNode,
+  config: GlobalConfig,
+  fallbackRenderer?: TagRenderer,
 ): RenderResult | null => {
   if (!node) {
     return null;
@@ -17,4 +17,4 @@ export const renderTag = (
   }
 
   return renderer(node, config);
-}; 
+};

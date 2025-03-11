@@ -1,7 +1,12 @@
-import { HTMLNode, GlobalConfig, RenderResult, StyleFunction } from '../../types';
-import { inlineTag } from '../tag-helpers/inline-tag';
-import { blockTag } from '../tag-helpers/block-tag';
-import wrapAnsi from 'wrap-ansi';
+import {
+  HTMLNode,
+  GlobalConfig,
+  RenderResult,
+  StyleFunction,
+} from "../../types";
+import { inlineTag } from "../tag-helpers/inline-tag";
+import { blockTag } from "../tag-helpers/block-tag";
+import wrapAnsi from "wrap-ansi";
 
 export const code = (node: HTMLNode, config: GlobalConfig): RenderResult => {
   const result = inlineTag()(node, config);
@@ -11,29 +16,33 @@ export const code = (node: HTMLNode, config: GlobalConfig): RenderResult => {
   const codeValue = codeTheme?.(content) || content;
 
   // If inside pre tag, render as block code
-  if (node.parentNode?.nodeName === 'pre') {
-    const codeValueLines = codeValue.split('\n');
+  if (node.parentNode?.nodeName === "pre") {
+    const codeValueLines = codeValue.split("\n");
     const codeLinesLength = `${codeValueLines.length}`.length;
-    const pad = `${Array.from({ length: codeLinesLength + 2 }).join(' ')}`;
+    const pad = `${Array.from({ length: codeLinesLength + 2 }).join(" ")}`;
 
-    const codeContent = codeValueLines.map(
-      (codeLine, index) => {
-        const codeNumbersTheme = config.theme?.codeNumbers as StyleFunction | undefined;
-        const lineNumber = codeNumbersTheme?.(
-          `${index + 1}`.padStart(codeLinesLength, ' ')
-        ) || `${index + 1}`.padStart(codeLinesLength, ' ');
-        const wrappedLine = wrapAnsi(`|${codeLine}|`, (config.width || 80) - pad.length - 2, {
+    const codeContent = codeValueLines.map((codeLine, index) => {
+      const codeNumbersTheme = config.theme?.codeNumbers as
+        | StyleFunction
+        | undefined;
+      const lineNumber =
+        codeNumbersTheme?.(`${index + 1}`.padStart(codeLinesLength, " ")) ||
+        `${index + 1}`.padStart(codeLinesLength, " ");
+      const wrappedLine = wrapAnsi(
+        `|${codeLine}|`,
+        (config.width || 80) - pad.length - 2,
+        {
           trim: true,
-        }).slice(1, -1);
-        return `${lineNumber} ${wrappedLine}`;
-      }
-    );
+        },
+      ).slice(1, -1);
+      return `${lineNumber} ${wrappedLine}`;
+    });
 
     return {
-      value: codeContent.join('\n'),
+      value: codeContent.join("\n"),
       width: config.width,
-      type: 'block',
-      nodeName: 'code'
+      type: "block",
+      nodeName: "code",
     };
   }
 
@@ -43,19 +52,22 @@ export const code = (node: HTMLNode, config: GlobalConfig): RenderResult => {
   return {
     value: inlineCodeValue,
     width: (result.width || 0) + 2,
-    type: 'inline',
+    type: "inline",
     pre: result.pre || null,
     post: result.post || null,
-    nodeName: 'code'
+    nodeName: "code",
   };
 };
 
 export const pre = (node: HTMLNode, config: GlobalConfig): RenderResult => {
-  const result = blockTag(node, { ...config, width: (config.width || 80) - 10 });
+  const result = blockTag(node, {
+    ...config,
+    width: (config.width || 80) - 10,
+  });
   return {
     value: result.value,
     width: result.width,
-    type: 'block',
-    nodeName: 'pre'
+    type: "block",
+    nodeName: "pre",
   };
-}; 
+};

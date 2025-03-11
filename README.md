@@ -26,11 +26,11 @@ npm i @mistweaverco/cli-html
 ```
 
 ```js
-import cliHtml from '@mistweaverco/cli-html';
+import cliHtml from "@mistweaverco/cli-html";
 
 const html = `
 <h1>Hello World</h1>
-`
+`;
 
 console.log(cliHtml(html));
 ```

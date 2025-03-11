@@ -1,11 +1,13 @@
-import { HTMLNode, GlobalConfig, RenderResult, TagRenderer } from '../../types';
-import { blockTag } from '../tag-helpers/block-tag';
-import { inlineTag } from '../tag-helpers/inline-tag';
+import { HTMLNode, GlobalConfig, RenderResult, TagRenderer } from "../../types";
+import { blockTag } from "../tag-helpers/block-tag";
+import { inlineTag } from "../tag-helpers/inline-tag";
 
 // Helper function to create a basic block tag renderer
-const createBlockTag = () => (node: HTMLNode, config: GlobalConfig): RenderResult => {
-  return blockTag(node, config);
-};
+const createBlockTag =
+  () =>
+  (node: HTMLNode, config: GlobalConfig): RenderResult => {
+    return blockTag(node, config);
+  };
 
 // Export block elements
 export const article: TagRenderer = createBlockTag();
@@ -25,4 +27,4 @@ export const picture: TagRenderer = createBlockTag();
 export const section: TagRenderer = createBlockTag();
 
 // Export inline elements
-export const label: TagRenderer = inlineTag(); 
+export const label: TagRenderer = inlineTag();

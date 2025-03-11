@@ -6,7 +6,10 @@ interface InlineTag {
   nodeName?: string;
 }
 
-export const concatTwoInlineTags = (first: InlineTag | null, second: InlineTag | null): InlineTag | null => {
+export const concatTwoInlineTags = (
+  first: InlineTag | null,
+  second: InlineTag | null,
+): InlineTag | null => {
   if (first == null && second == null) {
     return null;
   }
@@ -20,17 +23,17 @@ export const concatTwoInlineTags = (first: InlineTag | null, second: InlineTag |
   }
 
   // Handle empty values
-  const firstValue = first.value ?? '';
-  const secondValue = second.value ?? '';
+  const firstValue = first.value ?? "";
+  const secondValue = second.value ?? "";
   const firstPre = first.pre ?? null;
   const firstPost = first.post ?? null;
   const secondPre = second.pre ?? null;
   const secondPost = second.post ?? null;
 
   // Build the combined value
-  let combinedValue = '';
-  let combinedPre = firstPre;
-  let combinedPost = secondPost;
+  let combinedValue = "";
+  const combinedPre = firstPre;
+  const combinedPost = secondPost;
 
   // Add first value if it exists
   if (firstValue) {
@@ -46,9 +49,13 @@ export const concatTwoInlineTags = (first: InlineTag | null, second: InlineTag |
       combinedValue += secondPre;
     }
     // Only add space if neither tag is a code tag and we need a space
-    else if (!combinedValue.endsWith(' ') && !secondValue.startsWith(' ') &&
-             first.nodeName !== 'code' && second.nodeName !== 'code') {
-      combinedValue += ' ';
+    else if (
+      !combinedValue.endsWith(" ") &&
+      !secondValue.startsWith(" ") &&
+      first.nodeName !== "code" &&
+      second.nodeName !== "code"
+    ) {
+      combinedValue += " ";
     }
   }
 
@@ -61,9 +68,9 @@ export const concatTwoInlineTags = (first: InlineTag | null, second: InlineTag |
     pre: combinedPre,
     value: combinedValue || null,
     post: combinedPost,
-    type: 'inline',
-    nodeName: second.nodeName
+    type: "inline",
+    nodeName: second.nodeName,
   };
 
   return result;
-}; 
+};

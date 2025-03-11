@@ -1,6 +1,6 @@
-import { HTMLNode, GlobalConfig, RenderResult } from '../../types';
-import { renderTag } from '../utils/render-tag';
-import { blockTag } from '../tag-helpers/block-tag';
+import { HTMLNode, GlobalConfig, RenderResult } from "../../types";
+import { renderTag } from "../utils/render-tag";
+import { blockTag } from "../tag-helpers/block-tag";
 
 interface Cell {
   value: string;
@@ -16,10 +16,16 @@ interface Row {
 
 const createCell = (node: HTMLNode, config: GlobalConfig): Cell => {
   const result = renderTag(node, config);
-  const rowSpan = parseInt(node.attrs?.find(attr => attr.name === 'rowspan')?.value || '1', 10);
-  const colSpan = parseInt(node.attrs?.find(attr => attr.name === 'colspan')?.value || '1', 10);
+  const rowSpan = parseInt(
+    node.attrs?.find((attr) => attr.name === "rowspan")?.value || "1",
+    10,
+  );
+  const colSpan = parseInt(
+    node.attrs?.find((attr) => attr.name === "colspan")?.value || "1",
+    10,
+  );
 
-  const value = result?.value || '';
+  const value = result?.value || "";
 
   return {
     value,
@@ -30,39 +36,46 @@ const createCell = (node: HTMLNode, config: GlobalConfig): Cell => {
 };
 
 const renderRow = (cells: Cell[], columnWidths: number[]): string => {
-  if (cells.length === 0) return '';
-  
+  if (cells.length === 0) return "";
+
   const cellValues = cells.map((cell, index) => {
     return cell.value.padEnd(columnWidths[index]);
   });
 
-  return `| ${cellValues.join(' | ')} |`;
+  return `| ${cellValues.join(" | ")} |`;
 };
 
 const renderSeparator = (columnWidths: number[]): string => {
-  const separators = columnWidths.map(width => '-'.repeat(width));
-  return `| ${separators.join(' | ')} |`;
+  const separators = columnWidths.map((width) => "-".repeat(width));
+  return `| ${separators.join(" | ")} |`;
 };
 
 const processTableStructure = (node: HTMLNode, config: GlobalConfig): Row[] => {
   const rows: Row[] = [];
-  
+
   const processRow = (rowNode: HTMLNode) => {
-    const cells = rowNode.childNodes
-      ?.filter(child => child.nodeName === 'td' || child.nodeName === 'th')
-      .map(cell => createCell(cell, config)) || [];
-      
-    const height = Math.max(...cells.map(cell => cell.value.split('\n').length));
-    
+    const cells =
+      rowNode.childNodes
+        ?.filter((child) => child.nodeName === "td" || child.nodeName === "th")
+        .map((cell) => createCell(cell, config)) || [];
+
+    const height = Math.max(
+      ...cells.map((cell) => cell.value.split("\n").length),
+    );
+
     return { cells, height };
   };
 
-  node.childNodes?.forEach(child => {
-    if (child.nodeName === 'tr') {
+  node.childNodes?.forEach((child) => {
+    if (child.nodeName === "tr") {
       rows.push(processRow(child));
-    } else if (child.nodeName === 'tbody' || child.nodeName === 'thead' || child.nodeName === 'tfoot') {
-      child.childNodes?.forEach(row => {
-        if (row.nodeName === 'tr') {
+    } else if (
+      child.nodeName === "tbody" ||
+      child.nodeName === "thead" ||
+      child.nodeName === "tfoot"
+    ) {
+      child.childNodes?.forEach((row) => {
+        if (row.nodeName === "tr") {
           rows.push(processRow(row));
         }
       });
@@ -74,35 +87,35 @@ const processTableStructure = (node: HTMLNode, config: GlobalConfig): Row[] => {
 
 const getColumnWidths = (rows: Row[]): number[] => {
   if (rows.length === 0) return [];
-  
-  const columnCount = Math.max(...rows.map(row => row.cells.length));
+
+  const columnCount = Math.max(...rows.map((row) => row.cells.length));
   const columnWidths = new Array(columnCount).fill(0);
-  
-  rows.forEach(row => {
+
+  rows.forEach((row) => {
     row.cells.forEach((cell, index) => {
       columnWidths[index] = Math.max(columnWidths[index], cell.value.length);
     });
   });
-  
+
   return columnWidths;
 };
 
 export const table = (node: HTMLNode, config: GlobalConfig): RenderResult => {
   const rows = processTableStructure(node, config);
-  if (rows.length === 0) return { value: '' };
+  if (rows.length === 0) return { value: "" };
 
   const columnWidths = getColumnWidths(rows);
   const tableRows = rows.map((row, index) => {
     const rowString = renderRow(row.cells, columnWidths);
     // Add separator after header row
     if (index === 0) {
-      return rowString + '\n' + renderSeparator(columnWidths);
+      return rowString + "\n" + renderSeparator(columnWidths);
     }
     return rowString;
   });
-  
+
   return {
-    value: tableRows.join('\n'),
+    value: tableRows.join("\n"),
     width: config.width,
   };
 };
@@ -110,7 +123,7 @@ export const table = (node: HTMLNode, config: GlobalConfig): RenderResult => {
 export const caption = (node: HTMLNode, config: GlobalConfig): RenderResult => {
   const result = renderTag(node, config);
   return {
-    value: result?.value || '',
+    value: result?.value || "",
     width: config.width,
   };
 };
@@ -129,4 +142,4 @@ export const th = (node: HTMLNode, config: GlobalConfig): RenderResult => {
     value: result.value,
     width: result.width,
   };
-}; 
+};
