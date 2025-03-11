@@ -3,6 +3,7 @@ interface InlineTag {
   value?: string | null;
   post?: string | null;
   type?: string;
+  nodeName?: string;
 }
 
 export const concatTwoInlineTags = (first: InlineTag | null, second: InlineTag | null): InlineTag | null => {
@@ -44,8 +45,9 @@ export const concatTwoInlineTags = (first: InlineTag | null, second: InlineTag |
     } else if (secondPre) {
       combinedValue += secondPre;
     }
-    // If no explicit whitespace but we need a space, add one
-    else if (!combinedValue.endsWith(' ') && !secondValue.startsWith(' ')) {
+    // Only add space if neither tag is a code tag and we need a space
+    else if (!combinedValue.endsWith(' ') && !secondValue.startsWith(' ') &&
+             first.nodeName !== 'code' && second.nodeName !== 'code') {
       combinedValue += ' ';
     }
   }
@@ -59,7 +61,8 @@ export const concatTwoInlineTags = (first: InlineTag | null, second: InlineTag |
     pre: combinedPre,
     value: combinedValue || null,
     post: combinedPost,
-    type: 'inline'
+    type: 'inline',
+    nodeName: second.nodeName
   };
 
   return result;
