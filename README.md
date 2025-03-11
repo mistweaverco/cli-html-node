@@ -40,7 +40,7 @@ console.log(cliHtml(html));
 cli-html uses [chalk](https://www.npmjs.com/package/chalk) to style the output.
 
 We're purposely stuck on v4.0.1,
-because this version supports the `chalk` to be bundled with the package.
+because this version supports `chalk` to be bundled with the package.
 
 This way you can completly bundle the package and use it in your CLI applications.
 
@@ -55,10 +55,10 @@ The orginal one relied on some packages that did not make this possible.
 
 Also the original package says that it's not supported/maintained anymore.
 
-- [chalk]: https://www.npmjs.com/package/chalk
+- [chalk](https://www.npmjs.com/package/chalk)
 
 We couldn't have done this without `chalk`.
 
-- [parse5]: https://www.npmjs.com/package/parse5
+- [parse5](https://www.npmjs.com/package/parse5)
 
 Does all the heavy lifting for parsing the HTML.
