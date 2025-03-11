@@ -1,6 +1,6 @@
 <div align="center">
 
-![cli-html Logo](logo.svg)
+![cli-html Logo](assets/logo.svg)
 
 # cli-html
 
@@ -11,9 +11,9 @@
 
 <p></p>
 
-> Render HTML in the Terminal.
-> Supports pretty tables,
-> syntax highlighting and has TypeScript support.
+Render HTML in the Terminal.
+
+Supports pretty tables, syntax highlighting and has TypeScript support.
 
 <p></p>
 
