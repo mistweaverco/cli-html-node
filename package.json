@@ -1,15 +1,16 @@
 {
   "name": "@mistweaverco/cli-html",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Convert HTML to CLI output with TypeScript support",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "rollup -c",
     "test": "jest",
     "lint": "eslint . --ext .ts",
-    "prepare": "npm run build"
+    "prepare": "rollup -c"
   },
+  "type": "module",
   "files": [
     "dist"
   ],
@@ -35,10 +36,12 @@
     "access": "public"
   },
   "homepage": "https://github.com/mistweaverco/cli-html-node",
-  "dependencies": {
-    "parse5": "7.1.2"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@rollup/plugin-commonjs": "28.0.3",
+    "@rollup/plugin-json": "6.1.0",
+    "@rollup/plugin-node-resolve": "16.0.0",
+    "@rollup/plugin-typescript": "12.1.2",
     "@types/node": "20.11.24",
     "@types/parse5": "7.0.0",
     "@types/wrap-ansi": "8.0.1",
@@ -48,7 +51,14 @@
     "chalk": "4.1.0",
     "chalk-string": "3.0.0",
     "eslint": "8.57.0",
+    "eslint-config-prettier": "10.1.1",
+    "eslint-plugin-prettier": "5.2.3",
+    "he": "1.2.0",
+    "normalize-html-whitespace": "1.0.0",
+    "parse5": "7.1.2",
+    "rollup": "4.35.0",
     "typescript": "5.3.3",
+    "typescript-eslint": "8.26.1",
     "wrap-ansi": "8.1.0"
   }
 }

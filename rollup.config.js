@@ -6,7 +6,7 @@ const config = [
   {
     input: "src/index.ts",
     output: {
-      file: "dist/app.cjs",
+      file: "dist/index.cjs",
       format: "cjs",
       sourcemap: false,
     },
@@ -16,6 +16,7 @@ const config = [
       commonjs(),
       typescript({
         tsconfig: "./tsconfig.json",
+        module: "ESNext",
         noForceEmit: true,
       }),
       resolve(),
