@@ -1,35 +1,54 @@
 import { HTMLNode, GlobalConfig, RenderResult } from '../../types';
 import { getAttribute } from '../utils';
 import { renderTag } from '../utils/render-tag';
+import { blockTag } from '../tag-helpers/block-tag';
 
 const renderListItemContent = (node: HTMLNode, config: GlobalConfig): string => {
   if (!node.childNodes) return '';
   
-  return node.childNodes
-    .map(child => renderTag(child, config))
+  // Separate nested lists from other content
+  const nestedLists = node.childNodes.filter(child => 
+    child.nodeName === 'ul' || child.nodeName === 'ol'
+  );
+  const otherContent = node.childNodes.filter(child => 
+    child.nodeName !== 'ul' && child.nodeName !== 'ol'
+  );
+
+  // Render main content
+  const mainContent = blockTag({ ...node, childNodes: otherContent }, config).value;
+
+  // Render nested lists
+  const nestedContent = nestedLists
+    .map(list => renderTag(list, config))
     .filter((result): result is RenderResult => result !== null)
     .map(result => result.value)
-    .join('');
+    .join('\n');
+
+  return mainContent + (nestedContent ? '\n' + nestedContent : '');
 };
 
 const renderListItems = (items: HTMLNode[], config: GlobalConfig, marker: string, level: number = 0): string => {
   return items
     .filter(item => item.nodeName === 'li')
-    .map((item, index) => {
+    .map((item) => {
       const content = renderListItemContent(item, config);
       if (!content) return '';
       
-      const prefix = marker === '1' ? `${index + 1}.` : marker;
-      const indent = '  '.repeat(level);
-      const prefixPadding = ' '.repeat(prefix.length + 1);
+      const indent = '  '.repeat(Math.max(0, level));
+      const prefix = marker;
       
       // Handle multiline content by adding proper indentation to each line
-      const lines = content.split('\n').filter(Boolean);
+      const lines = content.split('\n');
       return lines.map((line, i) => {
         if (i === 0) {
-          return `${indent}${prefix} ${line.trim()}`;
+          return `${indent}${prefix} ${line}`;
         }
-        return `${indent}${prefixPadding}${line.trim()}`;
+        // For nested lists, don't add extra indentation as they handle their own
+        if (line.startsWith('  ')) {
+          return `${indent}${line}`;
+        }
+        // For continuation lines of the main content
+        return `${indent}  ${line}`;
       }).join('\n');
     })
     .filter(Boolean)
@@ -75,5 +94,5 @@ const getNestingLevel = (node: HTMLNode): number => {
     current = current.parentNode;
   }
   
-  return level;
+  return Math.max(0, level - 1);
 }; 

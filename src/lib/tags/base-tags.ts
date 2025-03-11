@@ -7,22 +7,22 @@ const createBlockTag = () => (node: HTMLNode, config: GlobalConfig): RenderResul
   return blockTag(node, config);
 };
 
-// Export common block-level elements
-export const article = createBlockTag();
-export const aside = createBlockTag();
-export const blink = createBlockTag();
-export const dialog = createBlockTag();
-export const div = createBlockTag();
-export const figcaption = createBlockTag();
-export const footer = createBlockTag();
-export const form = createBlockTag();
-export const header = createBlockTag();
-export const hgroup = createBlockTag();
-export const main = createBlockTag();
-export const nav = createBlockTag();
-export const picture = createBlockTag();
-export const section = createBlockTag();
+// Export block elements
+export const article: TagRenderer = createBlockTag();
+export const aside: TagRenderer = createBlockTag();
+export const blink: TagRenderer = createBlockTag();
+export const dialog: TagRenderer = createBlockTag();
+export const div: TagRenderer = createBlockTag();
+export const figcaption: TagRenderer = createBlockTag();
+export const footer: TagRenderer = createBlockTag();
+export const form: TagRenderer = createBlockTag();
+export const header: TagRenderer = createBlockTag();
+export const hgroup: TagRenderer = createBlockTag();
+export const main: TagRenderer = createBlockTag();
+export const nav: TagRenderer = createBlockTag();
+export const p: TagRenderer = createBlockTag();
+export const picture: TagRenderer = createBlockTag();
+export const section: TagRenderer = createBlockTag();
 
 // Export inline elements
-export const label: TagRenderer = inlineTag();
-export const p: TagRenderer = inlineTag(); 
+export const label: TagRenderer = inlineTag(); 

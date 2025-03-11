@@ -1,12 +1,17 @@
 import { HTMLNode, GlobalConfig, RenderResult } from '../../types';
+import { inlineTag } from '../tag-helpers/inline-tag';
 import { blockTag } from '../tag-helpers/block-tag';
 import { getAttribute } from '../utils';
 
 export const code = (node: HTMLNode, config: GlobalConfig): RenderResult => {
-  const result = blockTag(node, config);
+  const result = inlineTag()(node, config);
   return {
     value: `\`${result.value}\``,
     width: (result.width || 0) + 2,
+    type: 'inline',
+    pre: result.pre || null,
+    post: result.post || null,
+    nodeName: 'code'
   };
 };
 
