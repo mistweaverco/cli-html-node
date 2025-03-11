@@ -1,9 +1,10 @@
 import { HTMLNode, Theme, GlobalConfig } from '../../types';
 import { getAttribute } from '../utils';
+import { getTheme } from './get-theme'
 
 export const getGlobalConfig = (document: HTMLNode, theme: Theme): GlobalConfig => {
   const htmlTag = document.childNodes?.find(node => node.nodeName === 'html');
-  
+  theme = { ...getTheme(), ...theme };
   if (!htmlTag) {
     return { theme };
   }
@@ -18,4 +19,4 @@ export const getGlobalConfig = (document: HTMLNode, theme: Theme): GlobalConfig 
     indent,
     skipFirst,
   };
-}; 
+};

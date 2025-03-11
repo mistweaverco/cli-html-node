@@ -13,7 +13,7 @@
 
 Render HTML in the Terminal.
 
-Supports pretty tables, syntax highlighting and has TypeScript support.
+Supports some fancy stuff and has TypeScript support.
 
 <p></p>
 

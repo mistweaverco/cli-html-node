@@ -1,44 +1,14 @@
 import { HTMLNode, GlobalConfig, RenderResult, StyleFunction } from '../../types';
 import { inlineTag } from '../tag-helpers/inline-tag';
 import { blockTag } from '../tag-helpers/block-tag';
-import { getAttribute } from '../utils';
-import chalk from 'chalk';
-import { highlight } from 'cli-highlight';
 import wrapAnsi from 'wrap-ansi';
-
-const getLanguageFromClass = (node: HTMLNode): string | null => {
-  const classAttr = getAttribute(node, 'class', '');
-  const classAttributes = classAttr.split(' ');
-
-  for (const classAttribute of classAttributes) {
-    if (classAttribute.startsWith('language-')) {
-      return classAttribute.slice(9);
-    }
-    if (classAttribute.startsWith('lang-')) {
-      return classAttribute.slice(5);
-    }
-  }
-
-  return null;
-};
 
 export const code = (node: HTMLNode, config: GlobalConfig): RenderResult => {
   const result = inlineTag()(node, config);
   const content = result.value;
-  const langName = getLanguageFromClass(node);
 
-  let codeValue: string;
-  if (langName) {
-    codeValue = highlight(content, {
-      language: langName,
-      theme: {
-        comment: chalk.blackBright,
-      },
-    });
-  } else {
-    const codeTheme = config.theme?.code as StyleFunction | undefined;
-    codeValue = codeTheme?.(content) || content;
-  }
+  const codeTheme = config.theme?.code as StyleFunction | undefined;
+  const codeValue = codeTheme?.(content) || content;
 
   // If inside pre tag, render as block code
   if (node.parentNode?.nodeName === 'pre') {

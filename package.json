@@ -32,15 +32,14 @@
     "url": "https://github.com/mistweaverco/cli-html-node.git"
   },
   "homepage": "https://github.com/mistweaverco/cli-html-node",
-  "dependencies": {
-    "cli-highlight": "2.1.11"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "20.11.24",
     "@types/parse5": "7.0.0",
     "@types/wrap-ansi": "8.0.1",
     "@typescript-eslint/eslint-plugin": "7.1.0",
     "@typescript-eslint/parser": "7.1.0",
+    "ansi-escapes": "7.0.0",
     "chalk": "4.1.0",
     "chalk-string": "3.0.0",
     "eslint": "8.57.0",
