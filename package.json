@@ -1,6 +1,6 @@
 {
   "name": "@mistweaverco/cli-html",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Convert HTML to CLI output with TypeScript support",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -35,7 +35,9 @@
     "access": "public"
   },
   "homepage": "https://github.com/mistweaverco/cli-html-node",
-  "dependencies": {},
+  "dependencies": {
+    "parse5": "7.1.2"
+  },
   "devDependencies": {
     "@types/node": "20.11.24",
     "@types/parse5": "7.0.0",
@@ -46,7 +48,6 @@
     "chalk": "4.1.0",
     "chalk-string": "3.0.0",
     "eslint": "8.57.0",
-    "parse5": "7.1.2",
     "typescript": "5.3.3",
     "wrap-ansi": "8.1.0"
   }
