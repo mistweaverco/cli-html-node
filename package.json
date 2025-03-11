@@ -32,7 +32,9 @@
     "url": "https://github.com/mistweaverco/cli-html-node.git"
   },
   "homepage": "https://github.com/mistweaverco/cli-html-node",
-  "dependencies": {},
+  "dependencies": {
+    "cli-highlight": "2.1.11"
+  },
   "devDependencies": {
     "@types/node": "20.11.24",
     "@types/parse5": "7.0.0",
